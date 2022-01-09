@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Joseph John's Data Visualization Assignment</title>
+
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename='css/main.css') }}">
+
+  </head>
+  <h1>Joseph John 18CJ024123</h1>
+  <body>
+      <h1 align="center">% of HIV/AIDS</h1>
+
+    <div class="cell">
+        <p class="main-text">
+        </p>
+        {% for i in range(2010, 2020, 1) %}
+
+        <img src="{{ url_for('static', filename='images/hbars3_'+i|string+'.png') }}" width="70%" >
+
+        {% endfor %}
+      </div>
+
+  </body>
+</html>
