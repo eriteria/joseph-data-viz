@@ -1,5 +1,4 @@
 from flask import Flask, redirect, render_template
-# from pymongo import MongoClient
 
 import pandas as pd
 import numpy as np
@@ -11,14 +10,9 @@ app =  Flask(__name__)
 def index():
     return render_template("index.html")
 
-@app.route('/refresh_plots', methods=['GET'])
+@app.route('/refresh_plots', methods=['POST'])
 def refresh_plots():
 
-    # #connect to db
-    # CONNECTION_STRING = "mongodb+srv://owolabioromidayo:thisisdayo99@cluster0.28vgr.mongodb.net/gdp_country?retryWrites=true&w=majority"
-    # client = MongoClient(CONNECTION_STRING)
-    # collection = client['gdp_country']['gdp_country']
-    # cursor = collection.find()
     
     #get and mutate dataframe
     african_countries = ["Algeria", "Angola", "Benin", "Botswana", "Burkina", "Burundi", "Cameroon", "Cape Verde",
@@ -29,17 +23,8 @@ def refresh_plots():
                          "Nigeria", "Rwanda", "Sao Tome and Principe", "Senegal", "Seychelles", "Sierra Leone",
                          "Somalia", "South Africa", "South Sudan", "Sudan", "Swaziland", "Tanzania", "Togo", "Tunisia",
                          "Uganda", "Zambia", "Zimbabwe"]
-    # df = pd.DataFrame(list(cursor))
-    # df = df.set_index('Reference Area')
-    # del df['_id']
-    # df['Time Period'] = pd.to_numeric(df['Time Period'])
-    # df['Observation Value'] = pd.to_numeric(df['Observation Value'])
-    # df = df.sort_values('Observation Value')
     df = pd.read_csv('cleaned_data.csv')
     df = df[['SpatialDim', 'TimeDim', 'NumericValue', 'Country']]
-    # df = df.set_index('Country')
-
-    print(df)
     
     #generate plots
     bar_plots(df)
